@@ -1,0 +1,230 @@
+record_id,dg_id,capacity_kva,date,start_time,stop_time,mains_restored_time,load_kw,fuel_used_litres,runtime_min,shutdown_delay_min,ground_truth_label,is_synthetic,notes
+REC-0001,DG-104,62.5,2026-05-01,13:30:00,16:39:00,16:35:00,27.7,41.06,189,4,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0002,DG-102,125.0,2026-05-02,09:45:00,10:40:00,10:35:00,42.8,19.47,55,5,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0003,DG-103,500.0,2026-05-05,10:15:00,10:51:00,10:48:00,276.2,42.88,36,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0004,DG-104,62.5,2026-05-05,14:15:00,17:13:00,17:11:00,32.0,28.77,178,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0005,DG-103,500.0,2026-05-05,14:50:00,15:27:00,15:25:00,317.6,47.93,37,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0006,DG-101,250.0,2026-05-06,13:20:00,18:19:00,18:16:00,109.8,228.54,299,3,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0007,DG-103,500.0,2026-05-07,09:10:00,10:06:00,10:02:00,66.9,25.55,56,4,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0008,DG-101,250.0,2026-05-07,09:15:00,12:36:00,12:31:00,91.0,148.26,201,5,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0009,DG-101,250.0,2026-05-07,10:20:00,13:36:00,13:30:00,146.3,122.53,196,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0010,DG-101,250.0,2026-05-07,13:10:00,13:52:00,13:47:00,92.5,17.26,42,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0011,DG-103,500.0,2026-05-07,16:00:00,17:31:00,17:22:00,254.9,100.8,91,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0012,DG-103,500.0,2026-05-08,16:50:00,19:57:00,19:51:00,254.5,208.78,187,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0013,DG-103,500.0,2026-05-09,11:15:00,12:12:00,12:07:00,347.8,84.05,57,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0014,DG-104,62.5,2026-05-09,19:15:00,21:31:00,21:24:00,21.0,14.54,136,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0015,DG-103,500.0,2026-05-10,09:30:00,14:15:00,14:10:00,281.8,332.5,285,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0016,DG-103,500.0,2026-05-10,20:10:00,00:05:00,23:57:00,327.9,316.87,235,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0017,DG-104,62.5,2026-05-11,14:30:00,15:18:00,15:14:00,25.6,6.29,48,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0018,DG-103,500.0,2026-05-12,15:00:00,16:56:00,16:49:00,211.2,107.25,116,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0019,DG-102,125.0,2026-05-12,15:20:00,16:59:00,16:52:00,51.6,25.36,99,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0020,DG-101,250.0,2026-05-13,13:20:00,15:56:00,15:52:00,238.8,153.21,156,4,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0021,DG-101,250.0,2026-05-13,13:20:00,16:48:00,16:42:00,157.8,142.43,208,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0022,DG-104,62.5,2026-05-14,20:45:00,22:57:00,22:53:00,19.7,22.44,132,4,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0023,DG-103,500.0,2026-05-15,08:30:00,10:07:00,10:04:00,281.3,118.31,97,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0024,DG-103,500.0,2026-05-16,19:45:00,01:14:00,01:12:00,285.2,389.1,329,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0025,DG-104,62.5,2026-05-18,18:50:00,20:03:00,19:58:00,34.9,12.4,73,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0026,DG-104,62.5,2026-05-19,16:30:00,21:43:00,21:40:00,33.3,50.7,313,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0027,DG-104,62.5,2026-05-20,14:15:00,16:06:00,15:58:00,20.2,11.35,111,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0028,DG-102,125.0,2026-05-20,16:50:00,17:33:00,17:26:00,74.1,24.41,43,7,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0029,DG-101,250.0,2026-05-20,20:00:00,21:05:00,20:56:00,102.1,29.48,65,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0030,DG-101,250.0,2026-05-21,08:15:00,13:30:00,13:28:00,113.0,157.56,315,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0031,DG-103,500.0,2026-05-21,11:50:00,14:30:00,14:27:00,256.8,176.46,160,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0032,DG-104,62.5,2026-05-21,20:45:00,21:37:00,21:32:00,28.2,7.42,52,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0033,DG-104,62.5,2026-05-24,08:50:00,13:15:00,13:06:00,25.2,34.57,265,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0034,DG-101,250.0,2026-05-24,15:20:00,16:07:00,16:00:00,96.6,21.62,47,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0035,DG-104,62.5,2026-05-28,08:00:00,09:19:00,09:15:00,25.3,10.52,79,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0036,DG-101,250.0,2026-05-28,15:10:00,20:21:00,20:12:00,109.9,160.25,311,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0037,DG-103,500.0,2026-05-28,20:10:00,23:34:00,22:40:00,235.4,195.55,204,54,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 54 min after mains power restored. Unnecessary diesel expenditure.
+REC-0038,DG-103,500.0,2026-05-30,13:30:00,14:12:00,14:10:00,305.3,54.39,42,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0039,DG-104,62.5,2026-05-30,18:10:00,19:05:00,18:59:00,33.4,9.15,55,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0040,DG-103,500.0,2026-05-30,19:10:00,20:03:00,19:54:00,456.9,100.17,53,9,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0041,DG-104,62.5,2026-06-01,16:45:00,21:24:00,21:17:00,29.5,42.85,279,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0042,DG-103,500.0,2026-06-01,19:45:00,23:44:00,23:38:00,484.4,457.89,239,6,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0043,DG-101,250.0,2026-06-06,19:45:00,20:45:00,20:43:00,141.6,36.97,60,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0044,DG-102,125.0,2026-06-08,19:15:00,00:31:00,00:23:00,71.6,101.93,316,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0045,DG-103,500.0,2026-06-09,11:15:00,15:51:00,15:42:00,351.0,392.48,276,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0046,DG-103,500.0,2026-06-09,20:20:00,20:57:00,20:53:00,319.1,48.34,37,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0047,DG-102,125.0,2026-06-10,19:00:00,00:01:00,23:58:00,57.7,80.53,301,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0048,DG-102,125.0,2026-06-11,10:50:00,15:16:00,15:07:00,54.6,70.91,266,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0049,DG-104,62.5,2026-06-12,13:00:00,16:46:00,16:38:00,26.1,29.31,226,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0050,DG-103,500.0,2026-06-12,13:50:00,14:40:00,14:35:00,212.0,46.79,50,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0051,DG-102,125.0,2026-06-12,15:20:00,16:10:00,16:01:00,40.1,9.91,50,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0052,DG-102,125.0,2026-06-13,10:00:00,12:00:00,11:54:00,63.3,34.7,120,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0053,DG-102,125.0,2026-06-13,20:30:00,21:28:00,21:22:00,41.1,19.33,58,6,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0054,DG-103,500.0,2026-06-14,16:30:00,19:20:00,19:14:00,230.8,163.16,170,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0055,DG-101,250.0,2026-06-15,14:00:00,14:41:00,14:33:00,135.1,24.71,41,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0056,DG-103,500.0,2026-06-15,15:15:00,20:41:00,20:33:00,71.3,163.84,326,8,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0057,DG-104,62.5,2026-06-16,13:20:00,14:02:00,13:59:00,37.5,7.92,42,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0058,DG-102,125.0,2026-06-18,09:45:00,11:20:00,11:14:00,49.6,22.39,95,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0059,DG-104,62.5,2026-06-20,09:30:00,10:27:00,10:24:00,23.5,7.07,57,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0060,DG-104,62.5,2026-06-21,09:10:00,09:47:00,09:44:00,36.9,11.99,37,3,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0061,DG-103,500.0,2026-06-22,20:45:00,22:05:00,22:02:00,248.0,82.51,80,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0062,DG-102,125.0,2026-06-25,16:15:00,19:57:00,19:51:00,18.3,33.13,222,6,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0063,DG-104,62.5,2026-06-26,11:50:00,13:17:00,13:14:00,21.4,9.64,87,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0064,DG-103,500.0,2026-06-26,14:50:00,15:30:00,15:23:00,231.0,40.51,40,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0065,DG-102,125.0,2026-06-27,10:10:00,10:47:00,10:39:00,75.1,12.96,37,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0066,DG-104,62.5,2026-06-29,15:00:00,19:53:00,19:51:00,9.0,23.48,293,2,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0067,DG-102,125.0,2026-06-30,09:10:00,10:27:00,10:18:00,66.2,23.04,77,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0068,DG-103,500.0,2026-06-30,13:10:00,15:43:00,15:39:00,289.1,186.55,153,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0069,DG-104,62.5,2026-07-01,11:15:00,12:12:00,12:08:00,36.9,10.31,57,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0070,DG-102,125.0,2026-07-02,08:45:00,09:36:00,09:32:00,53.2,12.97,51,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0071,DG-104,62.5,2026-07-02,13:10:00,15:25:00,15:19:00,32.0,20.76,135,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0072,DG-101,250.0,2026-07-02,16:30:00,17:39:00,17:35:00,120.7,36.96,69,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0073,DG-101,250.0,2026-07-03,11:50:00,13:34:00,13:25:00,99.2,49.45,104,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0074,DG-101,250.0,2026-07-03,20:45:00,21:31:00,21:24:00,141.6,29.16,46,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0075,DG-104,62.5,2026-07-04,08:00:00,08:55:00,08:49:00,32.9,9.06,55,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0076,DG-104,62.5,2026-07-05,20:00:00,21:34:00,21:28:00,36.4,17.52,94,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0077,DG-104,62.5,2026-07-06,11:50:00,17:01:00,16:55:00,23.0,35.64,311,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0078,DG-102,125.0,2026-07-07,09:00:00,11:24:00,11:18:00,68.7,44.66,144,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0079,DG-102,125.0,2026-07-07,10:10:00,14:48:00,14:15:00,56.0,72.05,278,33,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 33 min after mains power restored. Unnecessary diesel expenditure.
+REC-0080,DG-102,125.0,2026-07-07,20:00:00,20:40:00,20:31:00,56.3,10.92,40,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0081,DG-104,62.5,2026-07-07,20:50:00,21:49:00,21:41:00,20.9,6.61,59,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0082,DG-102,125.0,2026-07-08,18:10:00,18:54:00,18:50:00,65.2,13.82,44,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0083,DG-102,125.0,2026-07-09,13:15:00,17:38:00,17:35:00,69.6,89.05,263,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0084,DG-102,125.0,2026-07-09,14:15:00,15:25:00,15:17:00,46.1,15.33,70,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0085,DG-101,250.0,2026-07-10,10:10:00,11:02:00,10:57:00,92.1,21.11,52,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0086,DG-101,250.0,2026-07-10,15:15:00,17:54:00,17:45:00,157.0,110.0,159,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0087,DG-103,500.0,2026-07-10,19:00:00,23:44:00,23:41:00,209.1,264.53,284,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0088,DG-104,62.5,2026-07-11,08:45:00,10:03:00,09:56:00,19.5,13.85,78,7,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0089,DG-103,500.0,2026-07-12,10:20:00,11:12:00,11:09:00,288.7,65.46,52,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0090,DG-101,250.0,2026-07-12,18:45:00,20:29:00,20:27:00,108.0,49.46,104,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0091,DG-101,250.0,2026-07-13,19:15:00,20:26:00,20:19:00,128.6,42.08,71,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0092,DG-102,125.0,2026-07-14,15:00:00,20:18:00,20:11:00,66.7,99.21,318,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0093,DG-101,250.0,2026-07-15,11:00:00,14:58:00,14:49:00,230.6,244.83,238,9,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0094,DG-101,250.0,2026-07-15,11:20:00,14:04:00,13:57:00,132.5,95.77,164,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0095,DG-103,500.0,2026-07-15,19:45:00,01:08:00,01:04:00,282.4,628.98,323,4,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0096,DG-103,500.0,2026-07-16,10:45:00,14:11:00,14:07:00,219.4,188.06,206,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0097,DG-102,125.0,2026-07-16,13:45:00,17:20:00,17:14:00,62.4,65.81,215,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0098,DG-102,125.0,2026-07-17,11:50:00,14:27:00,14:23:00,59.9,44.11,157,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0099,DG-102,125.0,2026-07-19,15:45:00,20:56:00,20:51:00,49.0,72.67,311,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0100,DG-101,250.0,2026-07-20,15:15:00,16:33:00,16:24:00,121.7,44.28,78,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0101,DG-101,250.0,2026-07-20,19:20:00,00:46:00,00:42:00,122.4,186.95,326,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0102,DG-103,500.0,2026-07-22,09:00:00,13:44:00,13:37:00,268.2,326.46,284,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0103,DG-104,62.5,2026-07-23,08:45:00,10:40:00,10:32:00,36.3,20.25,115,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0104,DG-102,125.0,2026-07-23,19:15:00,22:38:00,22:32:00,60.4,57.8,203,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0105,DG-101,250.0,2026-07-24,09:30:00,10:59:00,10:52:00,136.6,51.89,89,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0106,DG-102,125.0,2026-07-24,15:45:00,16:35:00,16:27:00,52.6,12.4,50,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0107,DG-104,62.5,2026-07-24,18:20:00,23:18:00,22:05:00,29.2,44.52,298,73,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 73 min after mains power restored. Unnecessary diesel expenditure.
+REC-0108,DG-101,250.0,2026-07-25,11:10:00,12:51:00,12:47:00,155.0,66.68,101,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0109,DG-104,62.5,2026-07-27,13:10:00,13:51:00,13:45:00,24.7,5.13,41,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0110,DG-101,250.0,2026-07-28,16:45:00,18:37:00,18:34:00,111.7,88.73,112,3,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0111,DG-101,250.0,2026-07-28,18:20:00,20:33:00,20:25:00,123.6,73.44,133,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0112,DG-104,62.5,2026-07-29,08:20:00,09:50:00,09:43:00,19.1,8.99,90,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0113,DG-103,500.0,2026-07-29,20:30:00,00:22:00,00:18:00,429.2,423.95,232,4,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0114,DG-103,500.0,2026-07-30,13:50:00,18:46:00,18:43:00,358.4,424.3,296,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0115,DG-103,500.0,2026-08-01,09:00:00,12:01:00,11:53:00,214.0,165.43,181,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0116,DG-103,500.0,2026-08-03,10:30:00,12:22:00,12:14:00,44.3,39.67,112,8,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0117,DG-102,125.0,2026-08-03,14:20:00,16:01:00,15:53:00,62.1,29.75,101,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0118,DG-104,62.5,2026-08-03,20:45:00,22:24:00,21:20:00,30.6,15.61,99,64,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 64 min after mains power restored. Unnecessary diesel expenditure.
+REC-0119,DG-102,125.0,2026-08-05,15:20:00,18:12:00,18:10:00,62.7,48.57,172,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0120,DG-103,500.0,2026-08-06,18:30:00,19:45:00,18:57:00,208.3,67.26,75,48,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 48 min after mains power restored. Unnecessary diesel expenditure.
+REC-0121,DG-103,500.0,2026-08-07,10:50:00,13:05:00,12:58:00,269.9,158.36,135,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0122,DG-104,62.5,2026-08-07,14:10:00,17:18:00,17:14:00,32.0,48.32,188,4,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0123,DG-101,250.0,2026-08-10,13:10:00,13:48:00,13:46:00,141.3,23.92,38,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0124,DG-101,250.0,2026-08-10,13:50:00,14:25:00,14:23:00,117.6,17.7,35,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0125,DG-103,500.0,2026-08-11,10:50:00,14:06:00,14:02:00,219.6,183.66,196,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0126,DG-103,500.0,2026-08-12,14:00:00,15:08:00,14:59:00,246.2,70.17,68,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0127,DG-104,62.5,2026-08-13,19:00:00,23:14:00,23:10:00,27.8,34.35,254,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0128,DG-102,125.0,2026-08-14,08:10:00,09:36:00,09:34:00,71.5,27.37,86,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0129,DG-103,500.0,2026-08-15,16:20:00,20:43:00,20:39:00,295.9,332.61,263,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0130,DG-103,500.0,2026-08-16,13:50:00,14:27:00,14:25:00,54.0,17.24,37,2,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0131,DG-102,125.0,2026-08-16,20:50:00,01:09:00,01:04:00,40.7,52.64,259,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0132,DG-103,500.0,2026-08-17,18:45:00,21:09:00,21:07:00,209.4,133.05,144,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0133,DG-104,62.5,2026-08-18,20:00:00,20:50:00,20:43:00,20.5,5.24,50,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0134,DG-103,500.0,2026-08-19,09:15:00,12:35:00,12:33:00,263.2,223.99,200,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0135,DG-102,125.0,2026-08-19,18:50:00,20:48:00,20:43:00,46.5,27.96,118,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0136,DG-104,62.5,2026-08-22,13:50:00,14:43:00,14:38:00,32.3,8.86,53,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0137,DG-102,125.0,2026-08-22,18:45:00,19:33:00,19:31:00,118.8,24.47,48,2,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0138,DG-103,500.0,2026-08-23,11:30:00,12:54:00,12:45:00,351.5,127.47,84,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0139,DG-102,125.0,2026-08-23,18:20:00,23:34:00,23:29:00,52.9,77.2,314,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0140,DG-104,62.5,2026-08-24,11:20:00,16:16:00,16:10:00,23.8,35.76,296,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0141,DG-103,500.0,2026-08-25,09:45:00,14:43:00,14:36:00,254.4,308.99,298,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0142,DG-103,500.0,2026-08-25,13:15:00,15:35:00,15:31:00,285.7,171.71,140,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0143,DG-104,62.5,2026-08-26,10:45:00,15:07:00,15:05:00,35.3,47.54,262,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0144,DG-101,250.0,2026-08-26,18:00:00,21:15:00,21:10:00,146.4,119.86,195,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0145,DG-101,250.0,2026-08-26,19:30:00,22:43:00,22:38:00,117.9,97.87,193,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0146,DG-102,125.0,2026-08-27,20:30:00,01:31:00,01:22:00,61.9,159.28,301,9,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0147,DG-104,62.5,2026-08-28,18:45:00,23:36:00,23:29:00,33.6,49.26,291,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0148,DG-101,250.0,2026-08-29,08:15:00,12:37:00,12:29:00,161.3,183.38,262,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0149,DG-103,500.0,2026-08-29,16:20:00,20:57:00,20:55:00,210.5,251.01,277,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0150,DG-104,62.5,2026-08-31,08:15:00,10:08:00,10:00:00,23.0,13.5,113,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0151,DG-102,125.0,2026-08-31,14:10:00,18:45:00,18:43:00,78.2,96.81,275,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0152,DG-102,125.0,2026-09-04,08:15:00,09:56:00,09:47:00,43.4,21.22,101,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0153,DG-104,62.5,2026-09-04,10:45:00,11:29:00,11:20:00,55.9,11.49,44,9,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0154,DG-104,62.5,2026-09-06,10:00:00,10:49:00,10:40:00,21.0,5.3,49,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0155,DG-104,62.5,2026-09-06,11:30:00,15:15:00,15:06:00,36.8,38.61,225,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0156,DG-102,125.0,2026-09-06,19:15:00,19:53:00,19:45:00,58.3,10.73,38,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0157,DG-104,62.5,2026-09-06,19:20:00,21:11:00,21:03:00,37.5,20.21,111,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0158,DG-102,125.0,2026-09-07,16:15:00,18:11:00,18:09:00,65.9,36.5,116,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0159,DG-101,250.0,2026-09-08,16:50:00,22:00:00,21:54:00,94.6,134.88,310,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0160,DG-104,62.5,2026-09-09,16:20:00,20:36:00,20:29:00,36.8,44.63,256,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0161,DG-101,250.0,2026-09-10,09:15:00,13:54:00,13:15:00,101.8,129.07,279,39,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 39 min after mains power restored. Unnecessary diesel expenditure.
+REC-0162,DG-101,250.0,2026-09-10,11:00:00,12:51:00,12:49:00,141.7,69.33,111,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0163,DG-103,500.0,2026-09-10,13:50:00,16:20:00,16:16:00,248.5,158.42,150,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0164,DG-104,62.5,2026-09-10,20:20:00,01:20:00,01:17:00,7.4,21.36,300,3,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0165,DG-104,62.5,2026-09-12,18:30:00,23:11:00,23:04:00,24.3,35.55,281,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0166,DG-101,250.0,2026-09-12,18:30:00,22:37:00,21:49:00,93.5,105.58,247,48,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 48 min after mains power restored. Unnecessary diesel expenditure.
+REC-0167,DG-101,250.0,2026-09-13,08:10:00,13:27:00,13:21:00,163.9,230.49,317,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0168,DG-101,250.0,2026-09-14,10:15:00,11:23:00,11:21:00,150.2,43.04,68,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0169,DG-102,125.0,2026-09-14,11:10:00,12:39:00,12:34:00,73.7,31.13,89,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0170,DG-104,62.5,2026-09-14,11:30:00,12:22:00,12:13:00,32.3,8.27,52,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0171,DG-103,500.0,2026-09-15,13:00:00,14:57:00,14:52:00,215.4,104.5,117,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0172,DG-104,62.5,2026-09-15,20:50:00,21:31:00,21:28:00,28.1,5.73,41,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0173,DG-104,62.5,2026-09-16,08:30:00,09:50:00,09:47:00,26.2,10.25,80,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0174,DG-103,500.0,2026-09-17,14:50:00,19:54:00,19:45:00,329.8,396.61,304,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0175,DG-101,250.0,2026-09-18,10:20:00,11:55:00,11:53:00,113.0,47.44,95,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0176,DG-101,250.0,2026-09-18,18:10:00,20:34:00,20:25:00,125.3,142.46,144,9,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0177,DG-103,500.0,2026-09-19,08:30:00,12:49:00,12:43:00,471.8,477.21,259,6,OVERLOAD,True (Demonstration Data),AI Review: Operating load exceeded recommended continuous prime rating. Risk of thermal stress and premature alternator degradation.
+REC-0178,DG-103,500.0,2026-09-19,08:45:00,12:17:00,12:13:00,254.4,223.24,212,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0179,DG-104,62.5,2026-09-20,14:00:00,15:00:00,14:52:00,31.0,9.42,60,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0180,DG-104,62.5,2026-09-20,16:00:00,19:30:00,19:26:00,25.7,27.03,210,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0181,DG-101,250.0,2026-09-21,11:45:00,13:34:00,13:30:00,112.3,57.36,109,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0182,DG-104,62.5,2026-09-22,19:20:00,22:47:00,22:38:00,30.0,44.27,207,9,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0183,DG-102,125.0,2026-09-24,15:30:00,18:38:00,18:30:00,52.1,45.88,188,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0184,DG-102,125.0,2026-09-24,19:20:00,21:15:00,21:07:00,66.4,35.13,115,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0185,DG-104,62.5,2026-09-26,19:45:00,21:19:00,21:15:00,33.4,16.2,94,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0186,DG-103,500.0,2026-09-27,18:10:00,20:20:00,19:33:00,327.4,182.51,130,47,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 47 min after mains power restored. Unnecessary diesel expenditure.
+REC-0187,DG-101,250.0,2026-09-28,18:30:00,20:50:00,19:39:00,165.3,99.96,140,71,SHUTDOWN_DELAY,True (Demonstration Data),Rule Alert: Generator continued running for 71 min after mains power restored. Unnecessary diesel expenditure.
+REC-0188,DG-104,62.5,2026-09-29,13:15:00,17:55:00,17:47:00,26.8,38.54,280,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0189,DG-104,62.5,2026-09-30,18:15:00,19:04:00,18:59:00,19.8,5.26,49,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0190,DG-101,250.0,2026-10-01,14:20:00,15:32:00,15:29:00,160.2,52.59,72,3,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0191,DG-102,125.0,2026-10-02,18:20:00,19:27:00,19:23:00,72.2,22.43,67,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0192,DG-101,250.0,2026-10-05,19:30:00,20:17:00,20:10:00,154.8,32.33,47,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0193,DG-101,250.0,2026-10-06,13:50:00,16:04:00,15:56:00,146.9,87.71,134,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0194,DG-103,500.0,2026-10-06,15:50:00,17:23:00,17:14:00,296.5,117.25,93,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0195,DG-103,500.0,2026-10-07,20:30:00,22:47:00,22:43:00,254.3,153.71,137,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0196,DG-102,125.0,2026-10-10,11:30:00,13:18:00,13:12:00,76.1,38.4,108,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0197,DG-103,500.0,2026-10-10,16:45:00,19:12:00,19:03:00,347.1,216.07,147,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0198,DG-101,250.0,2026-10-11,13:15:00,17:37:00,17:29:00,149.8,174.1,262,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0199,DG-101,250.0,2026-10-12,15:10:00,19:48:00,19:40:00,126.4,154.23,278,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0200,DG-101,250.0,2026-10-13,20:20:00,22:27:00,22:18:00,107.1,64.58,127,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0201,DG-101,250.0,2026-10-14,14:50:00,19:31:00,19:22:00,101.1,132.7,281,9,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0202,DG-103,500.0,2026-10-14,15:00:00,19:43:00,19:35:00,237.6,287.13,283,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0203,DG-101,250.0,2026-10-14,19:10:00,21:02:00,21:00:00,157.0,80.2,112,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0204,DG-103,500.0,2026-10-15,14:45:00,19:05:00,18:59:00,264.9,290.09,260,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0205,DG-103,500.0,2026-10-15,20:20:00,23:55:00,23:51:00,303.0,266.57,215,4,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0206,DG-101,250.0,2026-10-16,15:15:00,19:26:00,19:19:00,162.2,281.25,251,7,EXCESSIVE_FUEL,True (Demonstration Data),AI Review: Fuel consumption disproportionately elevated relative to load and runtime. Potential fuel leakage or injector calibration issue.
+REC-0207,DG-101,250.0,2026-10-16,18:20:00,20:49:00,20:47:00,129.9,85.61,149,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0208,DG-103,500.0,2026-10-17,09:45:00,15:15:00,15:10:00,311.6,429.5,330,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0209,DG-101,250.0,2026-10-17,15:30:00,16:29:00,16:27:00,92.7,25.57,59,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0210,DG-104,62.5,2026-10-18,15:45:00,19:08:00,19:03:00,34.2,33.47,203,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0211,DG-103,500.0,2026-10-19,20:50:00,22:41:00,22:39:00,61.4,56.1,111,2,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0212,DG-101,250.0,2026-10-20,11:20:00,11:58:00,11:51:00,123.5,21.16,38,7,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0213,DG-104,62.5,2026-10-20,19:30:00,21:30:00,21:28:00,34.9,20.2,120,2,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0214,DG-102,125.0,2026-10-21,16:15:00,17:48:00,17:43:00,55.9,25.13,93,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0215,DG-102,125.0,2026-10-22,11:00:00,11:53:00,11:48:00,56.8,14.19,53,5,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0216,DG-102,125.0,2026-10-22,11:45:00,17:01:00,16:57:00,17.5,47.58,316,4,UNDERLOAD,True (Demonstration Data),AI Review: Low load operating point (<25% rating) with degraded thermal efficiency; wet-stacking risk.
+REC-0217,DG-102,125.0,2026-10-23,15:10:00,19:49:00,19:43:00,46.7,62.16,279,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0218,DG-104,62.5,2026-10-24,13:20:00,14:04:00,13:58:00,28.9,6.44,44,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0219,DG-104,62.5,2026-10-24,14:00:00,18:36:00,18:30:00,28.0,38.6,276,6,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-0220,DG-103,500.0,2026-10-25,09:50:00,11:45:00,11:37:00,238.7,118.58,115,8,NORMAL,True (Demonstration Data),Normal operating parameters within standard load-fuel characteristic curve.
+REC-01085,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-34833,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-86340,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-54750,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-99685,DG-102,125.0,2026-10-29,15:09:00,19:15:10,,200.0,50.0,246.2,0.0,NORMAL,True (Demonstration Data),Operator logged operation
+REC-53062,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-20147,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-02648,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record
+REC-45802,DG-101,250.0,2026-10-26,11:00:00,12:30:00,12:20:00,160.0,55.0,90.0,10.0,NORMAL,True (Demonstration Data),Test integration record

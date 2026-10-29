@@ -1,0 +1,10 @@
+{
+  "diesel_price_per_litre": 95.0,
+  "currency_symbol": "\u20b9",
+  "co2_emission_factor": 2.68,
+  "shutdown_delay_threshold_min": 11.5,
+  "ai_contamination_rate": 0.08,
+  "max_overload_tolerance_pct": 115.0,
+  "frozen_sensor_threshold": 4,
+  "last_updated": "2026-10-29T21:53:41.079651"
+}

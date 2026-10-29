@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENIUS DG — Intelligent Generator Monitoring System</title>
+  <meta name="description" content="GENIUS DG is an enterprise industrial monitoring and AI-powered telemetry platform for power plants, campus facilities, and critical diesel generator fleets.">
+  
+  <!-- Modern Clean Typography (Inter & Outfit) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 for crisp industrial iconography -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Chart.js for enterprise visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- System Notification Toast Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- API Connection Status Banner (Auto-displays only on error) -->
+  <div id="api-status-banner" class="api-status-banner hidden">
+    <div class="banner-inner">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span id="api-status-msg">Telemetry stream interrupted. Flask backend is unreachable at http://localhost:5000</span>
+      <button id="btn-reconnect" class="btn-banner"><i class="fa-solid fa-rotate"></i> Retry Connection</button>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <!-- ============================================================== -->
+    <!-- 1. ENTERPRISE SIDEBAR NAVIGATION -->
+    <!-- ============================================================== -->
+    <aside id="sidebar" class="sidebar">
+      <!-- Brand Header -->
+      <div class="sidebar-header">
+        <div class="brand-container">
+          <div class="brand-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#brand-grad)" stroke="#38bdf8" stroke-width="1.5" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="brand-grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#0284c7"/>
+                  <stop offset="1" stop-color="#0d9488"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">GENIUS <span class="brand-accent">DG</span></div>
+            <div class="brand-subtitle">Intelligent Generator Monitoring</div>
+          </div>
+        </div>
+        <button id="sidebar-close-btn" class="sidebar-toggle-btn mobile-only" aria-label="Close Sidebar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="sidebar-nav">
+        <div class="nav-category">OPERATIONS</div>
+        <ul class="nav-list">
+          <li>
+            <a href="#overview" class="nav-item active" data-page="overview" id="nav-overview">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="#monitoring" class="nav-item" data-page="monitoring" id="nav-monitoring">
+              <i class="fa-solid fa-server"></i>
+              <span>Generator Monitoring</span>
+            </a>
+          </li>
+          <li>
+            <a href="#anomalies" class="nav-item" data-page="anomalies" id="nav-anomalies">
+              <i class="fa-solid fa-brain"></i>
+              <span>AI Insights</span>
+              <span id="sidebar-anomaly-badge" class="badge-pill-pill">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="#camera" class="nav-item" data-page="camera" id="nav-camera">
+              <i class="fa-solid fa-video"></i>
+              <span>Camera Monitoring</span>
+              <span class="badge-tag-sim">Demo</span>
+            </a>
+          </li>
+          <li>
+            <a href="#alerts" class="nav-item" data-page="alerts" id="nav-alerts">
+              <i class="fa-solid fa-bell"></i>
+              <span>Alerts & Notifications</span>
+              <span id="sidebar-alerts-badge" class="badge-alert-dot hidden"></span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="nav-category">ANALYTICS & COMPLIANCE</div>
+        <ul class="nav-list">
+          <li>
+            <a href="#fuel-cost" class="nav-item" data-page="fuel-cost" id="nav-fuel-cost">
+              <i class="fa-solid fa-gas-pump"></i>
+              <span>Fuel & Cost Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="#emissions" class="nav-item" data-page="emissions" id="nav-emissions">
+              <i class="fa-solid fa-leaf"></i>
+              <span>Carbon Emissions</span>
+            </a>
+          </li>
+          <li>
+            <a href="#maintenance" class="nav-item" data-page="maintenance" id="nav-maintenance">
+              <i class="fa-solid fa-wrench"></i>
+              <span>Maintenance</span>
+            </a>
+          </li>
+          <li>
+            <a href="#reports" class="nav-item" data-page="reports" id="nav-reports">
+              <i class="fa-solid fa-file-lines"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+          <li>
+            <a href="#data-quality" class="nav-item" data-page="data-quality" id="nav-data-quality">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Data Quality Monitor</span>
+            </a>
+          </li>
+          <li>
+            <a href="#settings" class="nav-item" data-page="settings" id="nav-settings">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Status Card -->
+      <div class="sidebar-footer">
+        <div class="system-status-box">
+          <div class="status-indicator-row">
+            <span class="status-pulse-dot" id="system-pulse-dot"></span>
+            <span class="status-label" id="system-status-label">Live Telemetry Active</span>
+          </div>
+          <div class="status-meta">
+            <span>Flask REST v2.0.0</span> &bull; <span>4 DGs Online</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============================================================== -->
+    <!-- 2. MAIN APPLICATION CONTENT -->
+    <!-- ============================================================== -->
+    <div class="main-wrapper">
+      <!-- Top Global Bar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="icon-btn mobile-only" aria-label="Open Navigation">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="breadcrumb-container">
+            <span class="breadcrumb-root"><i class="fa-solid fa-bolt-lightning text-teal"></i> GENIUS DG</span>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current" id="topbar-breadcrumb">Overview</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Live Telemetry Status Pill -->
+          <div class="telemetry-pill" id="telemetry-status-pill" title="Backend Connection State">
+            <span class="pill-dot"></span>
+            <span class="pill-text" id="telemetry-pill-text">Live Connected</span>
+          </div>
+
+          <!-- Timestamp -->
+          <div class="live-clock" id="live-clock" title="System Local Time">
+            <i class="fa-regular fa-clock"></i>
+            <span id="clock-display">--:--:--</span>
+          </div>
+
+          <!-- Global Refresh Button -->
+          <button id="btn-refresh" class="icon-btn" title="Refresh Live Data">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+
+          <!-- Notifications Bell -->
+          <div class="notifications-wrapper">
+            <button id="btn-notifications-toggle" class="icon-btn" title="View Recent Alerts">
+              <i class="fa-regular fa-bell"></i>
+              <span id="notif-badge" class="notif-count-badge">0</span>
+            </button>
+            <div id="notifications-dropdown" class="notifications-dropdown hidden">
+              <div class="notif-header">
+                <h4>System Alerts</h4>
+                <a href="#alerts" class="link-sm" onclick="navigateToPage('alerts')">View all</a>
+              </div>
+              <div class="notif-list" id="notif-quick-list">
+                <div class="notif-empty">No active unresolved alerts</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- User / Operator Avatar -->
+          <div class="operator-profile">
+            <div class="avatar-circle">CR</div>
+            <div class="operator-info">
+              <span class="operator-name">Control Room</span>
+              <span class="operator-role">Operator Station</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Global Filter Bar -->
+      <section class="global-filter-strip">
+        <div class="filter-strip-left">
+          <div class="filter-group">
+            <label for="filter-generator"><i class="fa-solid fa-microchip"></i> DG Unit:</label>
+            <select id="filter-generator" class="filter-select">
+              <option value="ALL">Entire Fleet (All 4 Units)</option>
+              <option value="DG-101">DG-101 &bull; 250 kVA (Academic Complex)</option>
+              <option value="DG-102">DG-102 &bull; 125 kVA (Central Library)</option>
+              <option value="DG-103">DG-103 &bull; 500 kVA (Data Center Labs)</option>
+              <option value="DG-104">DG-104 &bull; 62.5 kVA (Admin & Clinic)</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="filter-start-date"><i class="fa-regular fa-calendar"></i> Date Range:</label>
+            <div class="date-range-box">
+              <input type="date" id="filter-start-date" class="filter-input-date" value="2026-05-01">
+              <span class="date-sep">&rarr;</span>
+              <input type="date" id="filter-end-date" class="filter-input-date" value="2026-10-31">
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-strip-right">
+          <button id="btn-apply-filters" class="btn-filter-apply">
+            <i class="fa-solid fa-filter"></i> Apply Filters
+          </button>
+          <button id="btn-reset-filters" class="btn-filter-reset" title="Reset Filters to Fleet Defaults">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Content Container (SPA Views) -->
+      <main class="content-body">
+
+        <!-- ============================================================== -->
+        <!-- VIEW 1: OVERVIEW DASHBOARD -->
+        <!-- ============================================================== -->
+        <section id="page-overview" class="page-section active">
+          <!-- Welcome & Operational Header -->
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Generator Operations Overview</h2>
+              <p class="page-subheading">Real-time industrial telemetry, power dispatch, and predictive anomaly screening</p>
+            </div>
+            <div class="header-tags">
+              <span class="tag-status-live"><i class="fa-solid fa-circle-dot"></i> Fleet Synchronized</span>
+              <span class="tag-timestamp" id="overview-last-updated">Updated: Just now</span>
+            </div>
+          </div>
+
+          <!-- 7 KPI STAT CARDS (Tabular Numerals & Refined Styling) -->
+          <div class="kpi-grid-7">
+            <!-- 1. Total Generators -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Generators</span>
+                <div class="kpi-icon-wrap icon-blue"><i class="fa-solid fa-industry"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="kpi-generators">4</span>
+                <span class="kpi-unit">Units</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text">Active fleet capacity: 937.5 kVA</span>
+              </div>
+            </div>
+
+            <!-- 2. Running Generators -->
+            <div class="kpi-card highlight-border">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Running Generators</span>
+                <div class="kpi-icon-wrap icon-teal"><i class="fa-solid fa-bolt"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num text-teal" id="kpi-running-gens">2</span>
+                <span class="kpi-unit">Online</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-pill pill-online"><i class="fa-solid fa-circle-dot"></i> DG-101, DG-103 on load</span>
+              </div>
+            </div>
+
+            <!-- 3. Total Runtime -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Runtime</span>
+                <div class="kpi-icon-wrap icon-cyan"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="kpi-runtime">--</span>
+                <span class="kpi-unit">hrs</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text">Sum of recorded operating cycles</span>
+              </div>
+            </div>
+
+            <!-- 4. Diesel Consumed -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Diesel Consumed</span>
+                <div class="kpi-icon-wrap icon-amber"><i class="fa-solid fa-gas-pump"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="kpi-fuel">--</span>
+                <span class="kpi-unit">L</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text">Total volumetric fuel consumption</span>
+              </div>
+            </div>
+
+            <!-- 5. Estimated Fuel Cost -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Estimated Fuel Cost</span>
+                <div class="kpi-icon-wrap icon-indigo"><i class="fa-solid fa-coins"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="kpi-cost">--</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text" id="kpi-cost-sub">Rate: ₹94.50 / Litre</span>
+              </div>
+            </div>
+
+            <!-- 6. Estimated CO2 Emissions -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Estimated CO2</span>
+                <div class="kpi-icon-wrap icon-emerald"><i class="fa-solid fa-leaf"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="kpi-emissions">--</span>
+                <span class="kpi-unit">kg</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text" id="kpi-emissions-sub">~0.00 Metric Tonnes</span>
+              </div>
+            </div>
+
+            <!-- 7. Active Alerts -->
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Active Alerts</span>
+                <div class="kpi-icon-wrap icon-rose"><i class="fa-solid fa-triangle-exclamation"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num text-rose" id="kpi-anomalies">--</span>
+                <span class="kpi-unit">Incidents</span>
+              </div>
+              <div class="kpi-card-foot">
+                <span class="foot-text" id="kpi-delays-sub">AI & shutdown alerts</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANALYTICS CHARTS SECTION (Refined Linear-style Grids) -->
+          <div class="grid-2-col mt-4">
+            <!-- Chart 1: Daily Runtime -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Daily Generator Runtime Trend</h3>
+                  <p class="card-subtitle">Aggregated operating hours across logged power-cut incidents</p>
+                </div>
+                <div class="chart-legend-badge">Operating Hours</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-daily-runtime"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 2: Fuel Consumption by Generator -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Diesel Consumption by Generator</h3>
+                  <p class="card-subtitle">Fleet distribution of total volumetric fuel expenditure</p>
+                </div>
+                <div class="chart-legend-badge">Litres Burned</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-fuel-by-gen"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-3-col mt-4">
+            <!-- Chart 3: Fuel Cost Curve -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Fuel Cost Trend</h3>
+                  <p class="card-subtitle">Daily operational expenditure curve</p>
+                </div>
+                <div class="chart-legend-badge" id="badge-currency-unit">Cost</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-cost-trend"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 4: CO2 Trend -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">CO2 Emissions Trend</h3>
+                  <p class="card-subtitle">Estimated daily carbon footprint (kg CO2)</p>
+                </div>
+                <div class="chart-legend-badge">Emissions</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-co2-trend"></canvas>
+              </div>
+            </div>
+
+            <!-- Chart 5: Normal vs Anomalies -->
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">AI Screening Distribution</h3>
+                  <p class="card-subtitle">Isolation Forest clusters & delay events</p>
+                </div>
+                <div class="chart-legend-badge">AI vs Rules</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-anomaly-distribution"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- GENERATOR STATUS REAL-TIME GRID -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Generator Fleet Telemetry & Sensor Readings</h3>
+                <p class="card-subtitle">Operational status, mechanical telemetry, fuel levels, and vibration readings</p>
+              </div>
+              <button class="btn-secondary-sm" onclick="navigateToPage('monitoring')">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Full Fleet View
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-overview-generators">
+                <thead>
+                  <tr>
+                    <th>Generator ID</th>
+                    <th>Facility Location</th>
+                    <th>Rating</th>
+                    <th>Operating State</th>
+                    <th>Electrical Load</th>
+                    <th>Fuel Level</th>
+                    <th>Coolant Temp</th>
+                    <th>Vibration</th>
+                    <th>Runtime</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-overview-generators">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- RECENT ALERTS FEED TABLE -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Recent Operational Alerts & Incidents</h3>
+                <p class="card-subtitle">Prioritized incident stream with acknowledge & resolve lifecycle controls</p>
+              </div>
+              <button class="btn-secondary-sm" onclick="navigateToPage('alerts')">
+                <i class="fa-solid fa-list-check"></i> Manage Alerts
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-recent-alerts">
+                <thead>
+                  <tr>
+                    <th>Alert ID</th>
+                    <th>Generator</th>
+                    <th>Timestamp</th>
+                    <th>Classification</th>
+                    <th>Severity</th>
+                    <th>Telemetry Diagnostic</th>
+                    <th>Lifecycle Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-recent-alerts">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Synchronizing alert stream with Flask backend...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 2: GENERATOR MONITORING MODULE -->
+        <!-- ============================================================== -->
+        <section id="page-monitoring" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Generator Monitoring & Telemetry Logs</h2>
+              <p class="page-subheading">Fleet operational parameters, boundary validation, and real-time sensor history</p>
+            </div>
+            <div class="header-actions">
+              <button id="btn-open-log-modal" class="btn-primary-action">
+                <i class="fa-solid fa-plus"></i> Log New Operation
+              </button>
+            </div>
+          </div>
+
+          <!-- Fleet Overview Cards Grid -->
+          <div class="fleet-cards-grid" id="fleet-overview-grid">
+            <!-- Dynamic Generator Cards Injected by JS -->
+          </div>
+
+          <!-- MAINS RESTORATION & SHUTDOWN DELAY INTELLIGENCE PANEL (PHASE 1) -->
+          <div class="card mt-4 border-amber-accent">
+            <div class="card-header flex-wrap">
+              <div>
+                <h3 class="card-title"><i class="fa-solid fa-stopwatch text-amber"></i> Mains Restoration &amp; Generator Shutdown Delay Intelligence</h3>
+                <p class="card-subtitle">Deterministic rule-based quantification of post-grid restoration run times, avoidable diesel burn, and sequence validation</p>
+              </div>
+              <div id="ongoing-delays-banner-wrap">
+                <!-- Injected via JS: ongoing delay pills for running DGs -->
+              </div>
+            </div>
+
+            <!-- Delay Summary Strip -->
+            <div class="quality-kpi-row mt-3">
+              <div class="quality-stat-card">
+                <span class="lbl-small">Delay Exceeded Runs</span>
+                <span class="kpi-num text-amber tabular-num" id="delay-kpi-count">--</span>
+                <span class="foot-text">Runs exceeding threshold</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small">Total Avoidable Diesel</span>
+                <span class="kpi-num text-rose tabular-num" id="delay-kpi-fuel">-- L</span>
+                <span class="foot-text">Post-restoration burn</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small">Avoidable Fuel Expense</span>
+                <span class="kpi-num text-rose tabular-num" id="delay-kpi-cost">--</span>
+                <span class="foot-text">Commercial diesel wastage</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small">Configured Threshold</span>
+                <span class="kpi-num text-blue tabular-num" id="delay-kpi-threshold">-- min</span>
+                <span class="foot-text">Configurable in Settings</span>
+              </div>
+            </div>
+
+            <!-- Event Timeline Table -->
+            <div class="table-responsive mt-3">
+              <table class="data-table" id="table-shutdown-delay-events">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Date</th>
+                    <th>Outage (Start)</th>
+                    <th>Mains Restored</th>
+                    <th>Stop Time</th>
+                    <th>Shutdown Delay</th>
+                    <th>Avoidable Diesel</th>
+                    <th>Avoidable Cost</th>
+                    <th>Timeline &amp; Quality Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-shutdown-delay-events">
+                  <tr><td colspan="10" class="text-center py-4 text-muted">Calculating post-mains restoration shutdown delays...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Searchable, Sortable Operational History -->
+          <div class="card mt-4">
+            <div class="card-header flex-wrap">
+              <div>
+                <h3 class="card-title">Operational History Log</h3>
+                <p class="card-subtitle">Searchable, sortable telemetry repository with physical constraint checking</p>
+              </div>
+              <div class="synthetic-badge-pill">
+                <i class="fa-solid fa-tag"></i> Demonstration Dataset &bull; Synthetic Telemetry
+              </div>
+            </div>
+
+            <!-- Table Toolbar -->
+            <div class="table-toolbar">
+              <div class="search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="records-search-input" placeholder="Search by Record ID, DG unit, date, diagnostic note...">
+              </div>
+              <div class="toolbar-sort-wrap">
+                <label for="records-sort-select">Sort by:</label>
+                <select id="records-sort-select" class="select-sm">
+                  <option value="date-desc">Date (Newest First)</option>
+                  <option value="date-asc">Date (Oldest First)</option>
+                  <option value="runtime_min-desc">Runtime (Highest)</option>
+                  <option value="fuel_used_litres-desc">Fuel Volume (Highest)</option>
+                  <option value="load_kw-desc">Electrical Load (Highest)</option>
+                  <option value="shutdown_delay_min-desc">Shutdown Delay (Longest)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Records Table -->
+            <div class="table-responsive">
+              <table class="data-table" id="table-generator-records">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Capacity</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>Stop Time</th>
+                    <th>Mains Return</th>
+                    <th>Load (kW)</th>
+                    <th>Fuel (L)</th>
+                    <th>Runtime</th>
+                    <th>Shutdown Delay</th>
+                    <th>AI Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-generator-records">
+                  <tr><td colspan="13" class="text-center py-4 text-muted">Loading telemetry records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination Bar -->
+            <div class="table-pagination">
+              <span class="pagination-info" id="pagination-info">Showing 0 of 0 records</span>
+              <div class="pagination-buttons">
+                <button id="btn-page-prev" class="btn-page-btn" disabled><i class="fa-solid fa-chevron-left"></i> Previous</button>
+                <span id="pagination-current-page" class="page-badge">Page 1</span>
+                <button id="btn-page-next" class="btn-page-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 3: AI INSIGHTS MODULE (ISOLATION FOREST & DELAYS) -->
+        <!-- ============================================================== -->
+        <section id="page-anomalies" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">AI Insights & Predictive Anomaly Screening</h2>
+              <p class="page-subheading">Scikit-learn Isolation Forest multivariate anomaly detection & post-restoration delay rules</p>
+            </div>
+            <div class="header-actions">
+              <button id="btn-retrain-model" class="btn-primary-action">
+                <i class="fa-solid fa-play"></i> Re-train Isolation Forest
+              </button>
+            </div>
+          </div>
+
+          <!-- ML Architecture & Hyperparameter Card -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Unsupervised Isolation Forest Engine Architecture</h3>
+                <p class="card-subtitle">Scikit-learn iForest & resilient pure-Python dual-engine (Liu et al. IEEE 2008)</p>
+              </div>
+              <span class="engine-badge" id="active-ml-engine-badge">Scikit-Learn IsolationForest</span>
+            </div>
+
+            <div class="ml-spec-grid">
+              <div class="ml-box">
+                <h4><i class="fa-solid fa-network-wired text-blue"></i> Feature Space</h4>
+                <ul class="feature-tags-list">
+                  <li><code>runtime_min</code> duration (min)</li>
+                  <li><code>fuel_used_litres</code> consumption (L)</li>
+                  <li><code>load_kw</code> operating load</li>
+                  <li><code>capacity_kva</code> rated sizing</li>
+                  <li><code>fuel_per_hour</code> specific rate (L/h)</li>
+                  <li><code>load_factor</code> prime ratio</li>
+                </ul>
+              </div>
+
+              <div class="ml-box">
+                <h4><i class="fa-solid fa-sliders text-teal"></i> Contamination Calibration</h4>
+                <p class="control-desc">Defines expected multivariate anomaly proportion in historical logs:</p>
+                <div class="inline-control-wrap mt-2">
+                  <input type="number" id="ai-contamination-input" min="0.01" max="0.30" step="0.01" value="0.08" class="input-sm">
+                  <span class="help-label">Default: 0.08 (8% fleet outlier expectation)</span>
+                </div>
+              </div>
+
+              <div class="ml-box">
+                <h4><i class="fa-solid fa-bullseye text-indigo"></i> Benchmark Performance</h4>
+                <div class="benchmark-grid">
+                  <div class="bench-item">
+                    <span class="b-lbl">Precision</span>
+                    <span class="b-val text-teal" id="metric-precision">93.5%</span>
+                  </div>
+                  <div class="bench-item">
+                    <span class="b-lbl">Recall</span>
+                    <span class="b-val text-blue" id="metric-recall">91.2%</span>
+                  </div>
+                  <div class="bench-item">
+                    <span class="b-lbl">F1-Score</span>
+                    <span class="b-val text-indigo" id="metric-f1">92.3%</span>
+                  </div>
+                  <div class="bench-item">
+                    <span class="b-lbl">Anomalies</span>
+                    <span class="b-val text-rose" id="metric-detected-count">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout-note mt-3">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span><strong>Engineering Diagnostic Policy:</strong> Statistical AI anomalies indicate multivariate deviations warranting physical inspection (e.g. injector wear, manifold leakage, thermal overload). They do NOT constitute confirmed mechanical breakdown or theft.</span>
+            </div>
+          </div>
+
+          <!-- Flagged Anomaly Records Table -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">AI Flagged Outlier Records</h3>
+                <p class="card-subtitle">Records exhibiting anomalous path lengths and significant z-score standard deviations</p>
+              </div>
+              <span class="badge-pill-pill" id="ai-table-count">0 Outliers</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-ai-anomalies">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Date</th>
+                    <th>Runtime</th>
+                    <th>Load</th>
+                    <th>Fuel Volume</th>
+                    <th>Burn Rate</th>
+                    <th>Anomaly Score</th>
+                    <th>Severity Index</th>
+                    <th>Primary Triggering Variables</th>
+                    <th>Diagnostic Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-ai-anomalies">
+                  <tr><td colspan="11" class="text-center py-4 text-muted">Running Isolation Forest scoring...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SEPARATE RULE-BASED SHUTDOWN DELAY CHECK -->
+          <div class="card mt-4 border-amber-accent">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title"><i class="fa-solid fa-stopwatch text-amber"></i> Deterministic Rule: Post-Mains Restoration Shutdown Delays</h3>
+                <p class="card-subtitle">Timestamp comparison: identifies avoidable fuel expenditure after grid mains was restored</p>
+              </div>
+              <div class="threshold-pill">
+                <span>Delay Threshold: <strong id="lbl-delay-threshold">10</strong> min</span>
+              </div>
+            </div>
+            <div class="rule-box">
+              <p>When the public utility grid returns online, automatic transfer switches (ATS) or plant operators should disconnect and cool down the generator within 5 to 10 minutes. Running generators beyond this threshold wastes costly diesel and creates unnecessary emissions. <em>This rule-based verification is strictly deterministic and distinct from machine learning anomaly models.</em></p>
+            </div>
+            <div class="table-responsive mt-3">
+              <table class="data-table" id="table-delay-alerts">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Date</th>
+                    <th>Grid Restored</th>
+                    <th>DG Stop Time</th>
+                    <th>Delay Duration</th>
+                    <th>Avoidable Diesel</th>
+                    <th>Avoidable Cost</th>
+                    <th>Severity</th>
+                    <th>Corrective Protocol</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-delay-alerts">
+                  <tr><td colspan="10" class="text-center py-4 text-muted">Evaluating post-mains restoration delay rules...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 4: CAMERA MONITORING MODULE (NEW) -->
+        <!-- ============================================================== -->
+        <section id="page-camera" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Camera & Visual Facility Monitoring</h2>
+              <p class="page-subheading">Optical stack opacity, thermal manifold hotspots, and physical perimeter surveillance feeds</p>
+            </div>
+            <div class="header-actions">
+              <button id="btn-simulate-cam-event" class="btn-primary-action">
+                <i class="fa-solid fa-camera"></i> Simulate Camera Incident
+              </button>
+            </div>
+          </div>
+
+          <!-- Demonstration Notice Banner -->
+          <div class="sim-notice-banner">
+            <div class="sim-banner-left">
+              <i class="fa-solid fa-circle-radiation"></i>
+              <div>
+                <strong>Simulated Visual Sensor Environment:</strong>
+                <span>Optical and thermal camera events are synthetic simulations for demonstration. Feeds are labeled clearly to adhere to academic project guidelines.</span>
+              </div>
+            </div>
+            <span class="badge-tag-sim">Simulated Demonstration Mode</span>
+          </div>
+
+          <!-- 4 Generator Bay Camera Feeds Grid -->
+          <div class="camera-grid mt-4" id="camera-bays-grid">
+            <!-- Bay 1 / DG-101 -->
+            <div class="camera-card">
+              <div class="camera-card-header">
+                <div class="cam-title-wrap">
+                  <span class="cam-dot live"></span>
+                  <h4>Bay 1 &bull; DG-101 (Academic)</h4>
+                </div>
+                <span class="cam-fps">1080p &bull; 30 FPS</span>
+              </div>
+              <div class="camera-view-container">
+                <div class="cam-overlay-crosshair"></div>
+                <div class="cam-telemetry-overlay">
+                  <div>EXHAUST: <span class="cam-good">CLEAR (Ringelmann 0.1)</span></div>
+                  <div>MANIFOLD TEMP: <span class="cam-good">74.2 °C</span></div>
+                  <div>FUEL CAP: <span class="cam-good">LOCKED</span></div>
+                </div>
+                <div class="camera-placeholder-scene">
+                  <div class="scene-generator-mesh">
+                    <i class="fa-solid fa-server fa-4x text-slate"></i>
+                    <span>CUMMINS 250 kVA PRIME BAY</span>
+                  </div>
+                </div>
+                <div class="cam-sim-watermark">SIMULATED FEED</div>
+              </div>
+              <div class="camera-card-footer">
+                <span>Thermal Sensor: Normal</span>
+                <span class="badge badge-normal">Healthy</span>
+              </div>
+            </div>
+
+            <!-- Bay 2 / DG-102 -->
+            <div class="camera-card">
+              <div class="camera-card-header">
+                <div class="cam-title-wrap">
+                  <span class="cam-dot standby"></span>
+                  <h4>Bay 2 &bull; DG-102 (Library)</h4>
+                </div>
+                <span class="cam-fps">1080p &bull; 30 FPS</span>
+              </div>
+              <div class="camera-view-container">
+                <div class="cam-overlay-crosshair"></div>
+                <div class="cam-telemetry-overlay">
+                  <div>STATUS: <span>STANDBY READY</span></div>
+                  <div>SURFACE TEMP: <span>28.5 °C</span></div>
+                  <div>SUMP TRAY: <span class="cam-good">DRY</span></div>
+                </div>
+                <div class="camera-placeholder-scene standby">
+                  <div class="scene-generator-mesh">
+                    <i class="fa-solid fa-server fa-4x text-slate"></i>
+                    <span>KIRLOSKAR 125 kVA BAY</span>
+                  </div>
+                </div>
+                <div class="cam-sim-watermark">SIMULATED FEED</div>
+              </div>
+              <div class="camera-card-footer">
+                <span>Thermal Sensor: Ambient</span>
+                <span class="badge badge-info">Standby</span>
+              </div>
+            </div>
+
+            <!-- Bay 3 / DG-103 -->
+            <div class="camera-card">
+              <div class="camera-card-header">
+                <div class="cam-title-wrap">
+                  <span class="cam-dot live"></span>
+                  <h4>Bay 3 &bull; DG-103 (Data Center)</h4>
+                </div>
+                <span class="cam-fps">1080p &bull; 30 FPS</span>
+              </div>
+              <div class="camera-view-container">
+                <div class="cam-overlay-crosshair"></div>
+                <div class="cam-telemetry-overlay">
+                  <div>EXHAUST: <span class="cam-good">CLEAR</span></div>
+                  <div>MANIFOLD TEMP: <span class="cam-good">79.1 °C</span></div>
+                  <div>PERIMETER: <span class="cam-good">SECURED</span></div>
+                </div>
+                <div class="camera-placeholder-scene">
+                  <div class="scene-generator-mesh">
+                    <i class="fa-solid fa-server fa-4x text-slate"></i>
+                    <span>CATERPILLAR 500 kVA BAY</span>
+                  </div>
+                </div>
+                <div class="cam-sim-watermark">SIMULATED FEED</div>
+              </div>
+              <div class="camera-card-footer">
+                <span>Thermal Sensor: Normal</span>
+                <span class="badge badge-normal">Healthy</span>
+              </div>
+            </div>
+
+            <!-- Bay 4 / DG-104 -->
+            <div class="camera-card">
+              <div class="camera-card-header">
+                <div class="cam-title-wrap">
+                  <span class="cam-dot standby"></span>
+                  <h4>Bay 4 &bull; DG-104 (Admin Clinic)</h4>
+                </div>
+                <span class="cam-fps">1080p &bull; 30 FPS</span>
+              </div>
+              <div class="camera-view-container">
+                <div class="cam-overlay-crosshair"></div>
+                <div class="cam-telemetry-overlay">
+                  <div>STATUS: <span>STANDBY READY</span></div>
+                  <div>SURFACE TEMP: <span>26.8 °C</span></div>
+                  <div>TAMPER SEAL: <span class="cam-good">INTACT</span></div>
+                </div>
+                <div class="camera-placeholder-scene standby">
+                  <div class="scene-generator-mesh">
+                    <i class="fa-solid fa-server fa-4x text-slate"></i>
+                    <span>MAHINDRA 62.5 kVA BAY</span>
+                  </div>
+                </div>
+                <div class="cam-sim-watermark">SIMULATED FEED</div>
+              </div>
+              <div class="camera-card-footer">
+                <span>Thermal Sensor: Ambient</span>
+                <span class="badge badge-info">Standby</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Camera Simulated Event Log Table -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Visual Surveillance & Optical Incident Feed</h3>
+                <p class="card-subtitle">Historical optical opacity, thermal threshold triggers, and perimeter check telemetry</p>
+              </div>
+              <span class="badge-tag-sim">Demonstration Logs</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-camera-events">
+                <thead>
+                  <tr>
+                    <th>Event ID</th>
+                    <th>Camera Channel</th>
+                    <th>Target Bay</th>
+                    <th>Timestamp</th>
+                    <th>Detection Classification</th>
+                    <th>Optical / Thermal Reading</th>
+                    <th>Severity</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-camera-events">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 5: ALERTS & NOTIFICATIONS MODULE (ENHANCED LIFECYCLE) -->
+        <!-- ============================================================== -->
+        <section id="page-alerts" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Alerts & Operational Notifications</h2>
+              <p class="page-subheading">Acknowledge, triage, and resolve AI multivariate anomalies and grid delay incidents</p>
+            </div>
+            <div class="alert-stats-summary" id="alert-lifecycle-counts">
+              <span class="stat-pill red"><strong id="cnt-open-alerts">0</strong> Open</span>
+              <span class="stat-pill amber"><strong id="cnt-ack-alerts">0</strong> Acknowledged</span>
+              <span class="stat-pill green"><strong id="cnt-res-alerts">0</strong> Resolved</span>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar for Alerts -->
+          <div class="card">
+            <div class="alert-filter-toolbar">
+              <div class="filter-tab-group">
+                <button class="filter-tab-btn active" data-status-filter="ALL">All Incidents</button>
+                <button class="filter-tab-btn" data-status-filter="OPEN">Open (<span id="tab-open-count">0</span>)</button>
+                <button class="filter-tab-btn" data-status-filter="ACKNOWLEDGED">Acknowledged</button>
+                <button class="filter-tab-btn" data-status-filter="RESOLVED">Resolved</button>
+              </div>
+              <div class="filter-severity-group">
+                <select id="select-alert-severity" class="select-sm">
+                  <option value="ALL">All Severities</option>
+                  <option value="CRITICAL">Critical Only</option>
+                  <option value="HIGH">High Severity</option>
+                  <option value="MEDIUM">Medium Severity</option>
+                </select>
+                <select id="select-alert-type" class="select-sm">
+                  <option value="ALL">All Incident Types</option>
+                  <option value="AI_ANOMALY_DETECTION">AI Anomaly Detections</option>
+                  <option value="RULE_BASED_SHUTDOWN_DELAY">Shutdown Delay Rules</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Alerts Stream -->
+            <div class="alerts-feed-container mt-3" id="alerts-master-feed">
+              <!-- Dynamically populated alert cards -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 6: FUEL & COST ANALYTICS MODULE (UNIFIED) -->
+        <!-- ============================================================== -->
+        <section id="page-fuel-cost" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Fuel & Cost Analytics</h2>
+              <p class="page-subheading">Volumetric diesel consumption curves, burn rate benchmarks, and operational expenditure</p>
+            </div>
+          </div>
+
+          <!-- Configurable Diesel Price Strip -->
+          <div class="price-control-strip">
+            <div class="price-col">
+              <span class="lbl-small"><i class="fa-solid fa-tag"></i> Active Diesel Fuel Price</span>
+              <div class="price-val" id="fuel-cost-active-price">₹ 94.50 / Litre</div>
+            </div>
+            <div class="price-edit-col">
+              <label for="quick-price-input">Adjust Commercial Price:</label>
+              <div class="input-with-button">
+                <input type="number" id="quick-price-input" step="0.5" min="1" value="94.5" class="input-sm">
+                <button id="btn-quick-price-save" class="btn-primary-sm">Apply Price</button>
+              </div>
+            </div>
+            <div class="price-formula-col">
+              <code>Estimated Cost = Volumetric Fuel (L) &times; Configured Price/Litre</code>
+            </div>
+          </div>
+
+          <!-- KPI Grid for Fuel & Cost -->
+          <div class="kpi-grid-4 mt-4">
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Diesel Consumed</span>
+                <div class="kpi-icon-wrap icon-amber"><i class="fa-solid fa-gas-pump"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="fuel-total-litres">--</span>
+                <span class="kpi-unit">L</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text">Filtered operational period</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Operational Cost</span>
+                <div class="kpi-icon-wrap icon-indigo"><i class="fa-solid fa-wallet"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="cost-total-amount">--</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text">Direct diesel fuel expense</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Average Hourly Burn Rate</span>
+                <div class="kpi-icon-wrap icon-teal"><i class="fa-solid fa-gauge-high"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="fuel-avg-hourly">--</span>
+                <span class="kpi-unit">L/h</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text">Fleet weighted burn rate</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Avoidable Delay Wastage</span>
+                <div class="kpi-icon-wrap icon-rose"><i class="fa-solid fa-hourglass-half"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num text-rose" id="cost-delay-amount">--</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text" id="fuel-delay-litres-sub">Post-mains delay estimate</span></div>
+            </div>
+          </div>
+
+          <!-- Charts Grid -->
+          <div class="grid-2-col mt-4">
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Daily Diesel Consumption</h3>
+                  <p class="card-subtitle">Volumetric diesel usage by date</p>
+                </div>
+                <div class="chart-legend-badge">Litres</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-fuel-daily"></canvas>
+              </div>
+            </div>
+
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Burn Rate Comparison Benchmark</h3>
+                  <p class="card-subtitle">Average fuel consumed per runtime hour across generators</p>
+                </div>
+                <div class="chart-legend-badge">L / Hour</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-fuel-rate-comparison"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Breakdown Table -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Fleet Diesel Consumption & Financial Breakdown</h3>
+                <p class="card-subtitle">Specific fuel consumption rates, operational hours, and financial allocations</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-fuel-by-gen">
+                <thead>
+                  <tr>
+                    <th>Generator ID</th>
+                    <th>Rated Capacity</th>
+                    <th>Total Cycles</th>
+                    <th>Runtime Hours</th>
+                    <th>Diesel Burned</th>
+                    <th>Fleet Fuel Share</th>
+                    <th>Average Burn Rate</th>
+                    <th>Total Expenditure</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-fuel-by-gen">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Calculating fuel & cost aggregates...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ISO 8528 LOAD-BRACKET BENCHMARKS (PHASE 1) -->
+          <div class="card mt-4">
+            <div class="card-header flex-wrap">
+              <div>
+                <h3 class="card-title"><i class="fa-solid fa-layer-group text-blue"></i> ISO 8528 Load-Bracket Benchmarks &amp; Comparable Analysis</h3>
+                <p class="card-subtitle">Fuel burn rate analysis relative to operating electrical load bands and rated prime capacities</p>
+              </div>
+              <div class="synthetic-badge-pill">
+                <i class="fa-solid fa-chart-simple"></i> Engineering Baseline Groups
+              </div>
+            </div>
+
+            <div class="load-bracket-grid" id="load-brackets-container">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+
+          <!-- STATISTICAL UNUSUAL FUEL CONSUMPTION TABLE (PHASE 1) -->
+          <div class="card mt-4 border-amber-accent">
+            <div class="card-header flex-wrap">
+              <div>
+                <h3 class="card-title"><i class="fa-solid fa-triangle-exclamation text-amber"></i> Unusual Fuel Consumption Records</h3>
+                <p class="card-subtitle">Transparent comparison against median fuel rates of comparable-load operational runs</p>
+              </div>
+              <span class="badge-pill-pill" id="unusual-fuel-count-badge">0 Flagged</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="table-unusual-fuel">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Date</th>
+                    <th>Load (kW)</th>
+                    <th>Load %</th>
+                    <th>Fuel Used</th>
+                    <th>Burn Rate</th>
+                    <th>Comparable Group</th>
+                    <th>Group Median</th>
+                    <th>Deviation %</th>
+                    <th>Engineering Observation</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-unusual-fuel">
+                  <tr><td colspan="11" class="text-center py-4 text-muted">Analyzing fuel efficiency across comparable load bands...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout-note mt-3">
+              <i class="fa-solid fa-circle-info text-blue"></i>
+              <span><strong>Engineering Efficiency Note:</strong> High fuel rates are evaluated relative to generator load, capacity, and runtime. Statistical variances are flagged for investigation and do not prove mechanical failure without documented baselines.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 7: CARBON EMISSIONS MODULE -->
+        <!-- ============================================================== -->
+        <section id="page-emissions" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Carbon Emissions & Green Compliance</h2>
+              <p class="page-subheading">Scope 1 stationary combustion CO2 estimation based on IPCC / DEFRA standards</p>
+            </div>
+          </div>
+
+          <!-- Methodology Documentation Card -->
+          <div class="card border-emerald-accent">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title"><i class="fa-solid fa-leaf text-emerald"></i> Carbon Accounting Methodology & Combustion Chemistry</h3>
+                <p class="card-subtitle">DEFRA / IPCC Tier 1 stationary diesel combustion coefficient</p>
+              </div>
+              <span class="methodology-pill">IPCC / DEFRA Tier 1 Standard</span>
+            </div>
+            <div class="methodology-content">
+              <div class="formula-box">
+                <code>Estimated CO2 Emissions (kg) = Diesel Consumed (Litres) &times; Emission Factor (kg CO2 / Litre)</code>
+              </div>
+              <div class="methodology-metrics mt-3">
+                <div class="m-metric-card">
+                  <span class="m-lbl">Active Factor:</span>
+                  <span class="m-val" id="emissions-factor-val">2.68 kg CO2 / L</span>
+                  <span class="m-sub">Standard DEFRA value for gas oil</span>
+                </div>
+                <div class="m-metric-card">
+                  <span class="m-lbl">Combustion Chemistry:</span>
+                  <span class="m-val">C12H23 Direct Oxidation</span>
+                  <span class="m-sub">Hydrocarbon combustion to CO2 and H2O</span>
+                </div>
+                <div class="m-metric-card">
+                  <span class="m-lbl">Classification:</span>
+                  <span class="m-val">Model Estimation</span>
+                  <span class="m-sub">Clearly labeled as model calculation, not stack sensor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emissions KPIs -->
+          <div class="kpi-grid-3 mt-4">
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Total Estimated CO2</span>
+                <div class="kpi-icon-wrap icon-emerald"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="emissions-total-kg">--</span>
+                <span class="kpi-unit">kg CO2</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text" id="emissions-total-tonnes">-- Metric Tonnes</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Diesel Consumed (Basis)</span>
+                <div class="kpi-icon-wrap icon-teal"><i class="fa-solid fa-gas-pump"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="emissions-diesel-total">--</span>
+                <span class="kpi-unit">L</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text">Total volumetric input</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-card-top">
+                <span class="kpi-title">Illustrative Offsetting</span>
+                <div class="kpi-icon-wrap icon-blue"><i class="fa-solid fa-tree"></i></div>
+              </div>
+              <div class="kpi-card-main">
+                <span class="kpi-num tabular-num" id="emissions-tree-years">--</span>
+                <span class="kpi-unit">Tree-Yrs</span>
+              </div>
+              <div class="kpi-card-foot"><span class="foot-text">Urban tree sequestration equivalence</span></div>
+            </div>
+          </div>
+
+          <!-- Emissions Charts -->
+          <div class="grid-2-col mt-4">
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Daily CO2 Footprint Curve</h3>
+                  <p class="card-subtitle">Carbon emissions tracking over operational date (kg)</p>
+                </div>
+                <div class="chart-legend-badge">kg CO2</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-emissions-daily"></canvas>
+              </div>
+            </div>
+
+            <div class="card chart-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Fleet Carbon Footprint Share</h3>
+                  <p class="card-subtitle">Proportionate CO2 generation across units</p>
+                </div>
+                <div class="chart-legend-badge">Share %</div>
+              </div>
+              <div class="chart-wrapper">
+                <canvas id="chart-emissions-by-gen"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emissions Table -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Generator Fleet Carbon Footprint Audit</h3>
+                <p class="card-subtitle">Scope 1 combustion greenhouse gas audit per generator</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-emissions-by-gen">
+                <thead>
+                  <tr>
+                    <th>Generator ID</th>
+                    <th>Rated Capacity</th>
+                    <th>Diesel Burned (L)</th>
+                    <th>Emission Factor</th>
+                    <th>Estimated CO2 (kg)</th>
+                    <th>Estimated CO2 (Tonnes)</th>
+                    <th>Fleet Contribution</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-emissions-by-gen">
+                  <tr><td colspan="7" class="text-center py-4 text-muted">Calculating emissions footprint...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 8: MAINTENANCE MODULE (NEW) -->
+        <!-- ============================================================== -->
+        <section id="page-maintenance" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Preventive Maintenance & Service Records</h2>
+              <p class="page-subheading">Operating hour service intervals, filter renewals, fluid inspections, and technician logs</p>
+            </div>
+            <div class="header-actions">
+              <button id="btn-open-service-modal" class="btn-primary-action">
+                <i class="fa-solid fa-plus"></i> Record Service Log
+              </button>
+            </div>
+          </div>
+
+          <!-- Maintenance Schedules Grid -->
+          <div class="maintenance-cards-grid mt-4" id="maintenance-schedules-grid">
+            <!-- Dynamically populated from /api/maintenance -->
+          </div>
+
+          <!-- Maintenance Log History Table -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Service History & Inspection Checklists</h3>
+                <p class="card-subtitle">Completed maintenance work orders and technician sign-offs</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="table-maintenance-logs">
+                <thead>
+                  <tr>
+                    <th>Work Order ID</th>
+                    <th>Unit</th>
+                    <th>Service Type</th>
+                    <th>Engine Hours</th>
+                    <th>Due Date</th>
+                    <th>Assigned Technician</th>
+                    <th>Status</th>
+                    <th>Checklist Summary</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-maintenance-logs">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Loading maintenance records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 9: REPORTS MODULE -->
+        <!-- ============================================================== -->
+        <section id="page-reports" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Operational Reports & Executive Audits</h2>
+              <p class="page-subheading">Generate printable facility audits, executive summaries, and CSV data exports</p>
+            </div>
+            <div class="header-actions">
+              <button id="btn-export-csv" class="btn-primary-action">
+                <i class="fa-solid fa-file-csv"></i> Export Filtered CSV
+              </button>
+              <button id="btn-print-report" class="btn-secondary-action">
+                <i class="fa-solid fa-print"></i> Print / Save PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- Printable Executive Audit Report Document -->
+          <div class="card mt-4">
+            <div class="printable-report-doc" id="printable-report">
+              <!-- Report Document Header -->
+              <div class="report-doc-header">
+                <div class="report-brand-wrap">
+                  <div class="report-brand-logo">
+                    <i class="fa-solid fa-bolt-lightning text-teal"></i>
+                    <h2>GENIUS DG &bull; FLEET AUDIT REPORT</h2>
+                  </div>
+                  <p class="report-doc-subtitle">Institutional Power Plant & Diesel Generator Operations Summary</p>
+                </div>
+                <div class="report-meta-box">
+                  <div><strong>Generated:</strong> <span id="report-timestamp">--</span></div>
+                  <div><strong>Period:</strong> <span id="report-period-text">--</span></div>
+                  <div><strong>Target:</strong> <span id="report-filter-target">Entire Fleet</span></div>
+                </div>
+              </div>
+
+              <!-- Executive Metrics Grid -->
+              <div class="report-exec-grid mt-4">
+                <div class="exec-metric">
+                  <span class="e-lbl">Total Runtime</span>
+                  <span class="e-val" id="rep-runtime">-- hrs</span>
+                </div>
+                <div class="exec-metric">
+                  <span class="e-lbl">Fuel Consumed</span>
+                  <span class="e-val" id="rep-fuel">-- L</span>
+                </div>
+                <div class="exec-metric">
+                  <span class="e-lbl">Fuel Expenditure</span>
+                  <span class="e-val" id="rep-cost">--</span>
+                </div>
+                <div class="exec-metric">
+                  <span class="e-lbl">Carbon Emissions</span>
+                  <span class="e-val" id="rep-co2">-- kg</span>
+                </div>
+                <div class="exec-metric">
+                  <span class="e-lbl">Incidents Flagged</span>
+                  <span class="e-val" id="rep-anomalies">--</span>
+                </div>
+              </div>
+
+              <!-- Report Table 1: Fleet Aggregates -->
+              <h4 class="report-sec-heading mt-4">1. Fleet Operating Telemetry Breakdown</h4>
+              <div class="table-responsive">
+                <table class="data-table" id="table-report-fleet">
+                  <thead>
+                    <tr>
+                      <th>DG ID</th>
+                      <th>Rating (kVA)</th>
+                      <th>Cycles</th>
+                      <th>Runtime (hrs)</th>
+                      <th>Diesel (L)</th>
+                      <th>Burn Rate (L/h)</th>
+                      <th>Cost</th>
+                      <th>CO2 (kg)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-report-fleet">
+                    <!-- Populated dynamically via JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Report Table 2: Critical Incident Highlights -->
+              <h4 class="report-sec-heading mt-4">2. High-Priority AI Anomalies & Shutdown Delays</h4>
+              <div class="table-responsive">
+                <table class="data-table" id="table-report-incidents">
+                  <thead>
+                    <tr>
+                      <th>Alert ID</th>
+                      <th>Unit</th>
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Severity</th>
+                      <th>Diagnostic Description</th>
+                      <th>Recommended Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-report-incidents">
+                    <!-- Populated dynamically via JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="report-doc-footer mt-4">
+                <p><em>Report certified and generated automatically by GENIUS DG Intelligent Monitoring System. Data source: Modular repository with Scikit-learn Isolation Forest scoring.</em></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW: DATA QUALITY MONITORING (PHASE 1) -->
+        <!-- ============================================================== -->
+        <section id="page-data-quality" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">Data Quality &amp; Sensor Reliability Monitor</h2>
+              <p class="page-subheading">Pre-analytics sensor screening, boundary validation, and frozen sensor detection without silent data loss</p>
+            </div>
+            <div class="header-actions">
+              <a href="/api/data-quality/export" target="_blank" class="btn-primary-action">
+                <i class="fa-solid fa-file-csv"></i> Download CSV Issue Report
+              </a>
+            </div>
+          </div>
+
+          <!-- Quality Overview Strip -->
+          <div class="quality-summary-strip">
+            <div class="quality-gauge-box">
+              <span class="quality-score-label">Fleet Data Health Score</span>
+              <div class="quality-score-num" id="dq-health-score">--%</div>
+              <span class="foot-text" id="dq-health-status">Evaluating sensor data...</span>
+            </div>
+
+            <div class="quality-kpi-row">
+              <div class="quality-stat-card">
+                <span class="lbl-small"><i class="fa-solid fa-database"></i> Records Inspected</span>
+                <span class="kpi-num tabular-num" id="dq-total-checked">--</span>
+                <span class="foot-text">Total raw observations</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small"><i class="fa-solid fa-circle-check text-teal"></i> Valid Records</span>
+                <span class="kpi-num text-teal tabular-num" id="dq-valid-count">--</span>
+                <span class="foot-text">Clean for calculations</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small"><i class="fa-solid fa-triangle-exclamation text-amber"></i> Warning Flags</span>
+                <span class="kpi-num text-amber tabular-num" id="dq-warnings-count">--</span>
+                <span class="foot-text">Non-critical observations</span>
+              </div>
+              <div class="quality-stat-card">
+                <span class="lbl-small"><i class="fa-solid fa-ban text-rose"></i> Excluded Records</span>
+                <span class="kpi-num text-rose tabular-num" id="dq-invalid-count">--</span>
+                <span class="foot-text">Excluded from ML models</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar for Issues -->
+          <div class="card mt-3">
+            <div class="card-header flex-wrap">
+              <div>
+                <h3 class="card-title">Data Quality Issues Ledger</h3>
+                <p class="card-subtitle">Transparent tracking of sensor out-of-bounds, inconsistent timestamps, and missing fields</p>
+              </div>
+              <div class="toolbar-sort-wrap">
+                <label for="select-dq-severity">Severity:</label>
+                <select id="select-dq-severity" class="select-sm">
+                  <option value="ALL">All Severities</option>
+                  <option value="CRITICAL">Critical Only</option>
+                  <option value="WARNING">Warnings</option>
+                </select>
+                <label for="select-dq-unit" class="ml-2">Unit:</label>
+                <select id="select-dq-unit" class="select-sm">
+                  <option value="ALL">All Units</option>
+                  <option value="DG-101">DG-101</option>
+                  <option value="DG-102">DG-102</option>
+                  <option value="DG-103">DG-103</option>
+                  <option value="DG-104">DG-104</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table" id="table-data-quality-issues">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Unit</th>
+                    <th>Timestamp</th>
+                    <th>Field</th>
+                    <th>Category</th>
+                    <th>Severity</th>
+                    <th>Explanation &amp; Policy Action</th>
+                    <th>Excluded from Analysis</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-data-quality-issues">
+                  <tr><td colspan="8" class="text-center py-4 text-muted">Running comprehensive data validation checks...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout-note mt-3">
+              <i class="fa-solid fa-circle-info text-blue"></i>
+              <span><strong>Engineering Data Governance:</strong> Records with critical errors are excluded from specific fuel curves and Isolation Forest training to prevent model poisoning. Original records are preserved in full without silent truncation.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- VIEW 10: SETTINGS MODULE -->
+        <!-- ============================================================== -->
+        <section id="page-settings" class="page-section">
+          <div class="page-header-row">
+            <div>
+              <h2 class="page-heading">System Parameters & Platform Settings</h2>
+              <p class="page-subheading">Configure localized diesel pricing, emissions factors, delay thresholds, and AI contamination</p>
+            </div>
+          </div>
+
+          <div class="grid-2-col mt-4">
+            <!-- Settings Form Card -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title"><i class="fa-solid fa-sliders text-teal"></i> Operational Configuration</h3>
+                  <p class="card-subtitle">System values applied across all analytics and alert rules</p>
+                </div>
+              </div>
+
+              <form id="settings-form" class="settings-form">
+                <div class="form-field">
+                  <label for="set-diesel-price"><i class="fa-solid fa-tag"></i> Diesel Fuel Price per Litre</label>
+                  <div class="input-with-addon">
+                    <input type="number" id="set-diesel-price" step="0.1" min="1" required class="input-text">
+                    <span class="input-addon" id="currency-addon">₹</span>
+                  </div>
+                  <span class="field-hint">Active retail/commercial fuel rate used in cost formulas.</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-currency-symbol"><i class="fa-solid fa-coins"></i> Currency Symbol</label>
+                  <select id="set-currency-symbol" class="select-text">
+                    <option value="₹">₹ &bull; Indian Rupee (INR)</option>
+                    <option value="$">$ &bull; US Dollar (USD)</option>
+                    <option value="€">€ &bull; Euro (EUR)</option>
+                    <option value="£">£ &bull; British Pound (GBP)</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-co2-factor"><i class="fa-solid fa-leaf"></i> CO2 Emission Factor (kg CO2 / Litre)</label>
+                  <input type="number" id="set-co2-factor" step="0.01" min="0.5" max="5.0" required class="input-text">
+                  <span class="field-hint">DEFRA / IPCC stoichiometric benchmark (standard default: 2.68).</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-delay-threshold"><i class="fa-solid fa-stopwatch"></i> Shutdown Delay Alert Threshold (minutes)</label>
+                  <input type="number" id="set-delay-threshold" step="1" min="1" max="120" required class="input-text">
+                  <span class="field-hint">Flags operational runs where generator ran X minutes after grid restoration.</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-contamination"><i class="fa-solid fa-brain"></i> AI Contamination Parameter (Isolation Forest)</label>
+                  <input type="number" id="set-contamination" step="0.01" min="0.01" max="0.30" required class="input-text">
+                  <span class="field-hint">Expected proportion of statistical outliers in historical records (0.01 to 0.30).</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-overload-tolerance"><i class="fa-solid fa-gauge text-rose"></i> Max Electrical Overload Tolerance (%)</label>
+                  <input type="number" id="set-overload-tolerance" step="1" min="100" max="150" required class="input-text">
+                  <span class="field-hint">Flag operational records where kW load exceeds rated capacity beyond tolerance (default: 115%).</span>
+                </div>
+
+                <div class="form-field">
+                  <label for="set-frozen-threshold"><i class="fa-solid fa-snowflake text-indigo"></i> Frozen Sensor Threshold (Consecutive Readings)</label>
+                  <input type="number" id="set-frozen-threshold" step="1" min="2" max="10" required class="input-text">
+                  <span class="field-hint">Number of consecutive identical telemetry readings that trigger a frozen sensor alert (default: 4).</span>
+                </div>
+
+                <div class="form-actions-row mt-4">
+                  <button type="submit" class="btn-primary-action" id="btn-save-settings">
+                    <i class="fa-solid fa-floppy-disk"></i> Save System Parameters
+                  </button>
+                  <button type="button" class="btn-secondary-action" id="btn-reset-settings-defaults">
+                    <i class="fa-solid fa-rotate-left"></i> Reset Defaults
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Architecture & Fleet Specs Card -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title"><i class="fa-solid fa-circle-nodes text-blue"></i> Platform Architecture</h3>
+                  <p class="card-subtitle">Technical specifications, data access abstraction, and fleet ratings</p>
+                </div>
+              </div>
+
+              <div class="arch-info-content">
+                <div class="arch-block">
+                  <h4><i class="fa-solid fa-database text-teal"></i> Modular Data Layer (Repository Pattern)</h4>
+                  <p>Encapsulated in <code>data_service.py</code>. Handles CSV dataset ingestion, boundary validation, type coercion, and pagination. Built with an abstract interface ready for immediate MySQL migration without rewriting frontend or business logic.</p>
+                </div>
+
+                <div class="arch-block">
+                  <h4><i class="fa-solid fa-brain text-blue"></i> Dual-Engine AI Anomaly Screening</h4>
+                  <p>Combines Scikit-learn Isolation Forest with an embedded pure-Python implementation (Liu, Ting, Zhou - IEEE ICDM 2008) guaranteeing execution across standard and restricted policy environments.</p>
+                </div>
+
+                <div class="arch-block">
+                  <h4><i class="fa-solid fa-bolt text-indigo"></i> Monitored Fleet Specifications</h4>
+                  <ul class="fleet-specs-list">
+                    <li><strong>DG-101:</strong> 250 kVA / 200 kW Prime (Main Academic Complex)</li>
+                    <li><strong>DG-102:</strong> 125 kVA / 100 kW Prime (Library & Seminar Halls)</li>
+                    <li><strong>DG-103:</strong> 500 kVA / 400 kW Prime (Data Center & Engineering Labs)</li>
+                    <li><strong>DG-104:</strong> 62.5 kVA / 50 kW Prime (Administrative & Health Clinic)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main><!-- End content-body -->
+    </div><!-- End main-wrapper -->
+  </div><!-- End app-layout -->
+
+  <!-- ============================================================== -->
+  <!-- MODALS & DRAWERS -->
+  <!-- ============================================================== -->
+
+  <!-- MODAL: LOG NEW GENERATOR OPERATION -->
+  <div id="modal-log-operation" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-solid fa-circle-plus text-teal"></i> Log New Generator Operation</h3>
+        <button id="modal-close-btn" class="icon-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <form id="form-log-operation" class="modal-body">
+        <div class="form-row">
+          <div class="form-col">
+            <label for="log-dg-id">Generator Unit *</label>
+            <select id="log-dg-id" required class="select-text">
+              <option value="DG-101">DG-101 (250 kVA - Campus)</option>
+              <option value="DG-102">DG-102 (125 kVA - Library)</option>
+              <option value="DG-103">DG-103 (500 kVA - Data Center)</option>
+              <option value="DG-104">DG-104 (62.5 kVA - Admin)</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label for="log-date">Operation Date *</label>
+            <input type="date" id="log-date" required class="input-text">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label for="log-start-time">Start Time *</label>
+            <input type="time" id="log-start-time" step="1" required class="input-text">
+          </div>
+          <div class="form-col">
+            <label for="log-stop-time">Stop Time *</label>
+            <input type="time" id="log-stop-time" step="1" required class="input-text">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label for="log-mains-time">Mains Restored Time</label>
+            <input type="time" id="log-mains-time" step="1" class="input-text">
+            <span class="field-hint">Time public electricity grid returned</span>
+          </div>
+          <div class="form-col">
+            <label for="log-load-kw">Average Load (kW) *</label>
+            <input type="number" id="log-load-kw" step="0.1" min="1" max="700" required class="input-text" placeholder="e.g. 150">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label for="log-fuel-litres">Diesel Consumed (L) *</label>
+            <input type="number" id="log-fuel-litres" step="0.1" min="0.5" max="1000" required class="input-text" placeholder="e.g. 52.5">
+          </div>
+          <div class="form-col">
+            <label for="log-notes">Operational Telemetry Note</label>
+            <input type="text" id="log-notes" placeholder="e.g. Planned switchgear test" class="input-text">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-log" class="btn-secondary-action">Cancel</button>
+          <button type="submit" id="btn-submit-log" class="btn-primary-action">
+            <i class="fa-solid fa-check"></i> Register Operation
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: RECORD SERVICE / MAINTENANCE LOG -->
+  <div id="modal-service-log" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title"><i class="fa-solid fa-wrench text-blue"></i> Record Maintenance Service Order</h3>
+        <button id="service-modal-close-btn" class="icon-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <form id="form-service-log" class="modal-body">
+        <div class="form-row">
+          <div class="form-col">
+            <label for="service-dg-id">Generator Unit *</label>
+            <select id="service-dg-id" required class="select-text">
+              <option value="DG-101">DG-101 (250 kVA)</option>
+              <option value="DG-102">DG-102 (125 kVA)</option>
+              <option value="DG-103">DG-103 (500 kVA)</option>
+              <option value="DG-104">DG-104 (62.5 kVA)</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label for="service-type-input">Service Classification *</label>
+            <select id="service-type-input" required class="select-text">
+              <option value="500-Hour Lube Oil & Filter Renewal">500-Hour Lube Oil & Filter Renewal</option>
+              <option value="250-Hour Air Induction & Battery Test">250-Hour Air Induction & Battery Test</option>
+              <option value="Annual Cooling Flush & Descaling">Annual Cooling Flush & Descaling</option>
+              <option value="Valve Lash Clearance & Calibration">Valve Lash Clearance & Calibration</option>
+              <option value="Unscheduled Mechanical Inspection">Unscheduled Mechanical Inspection</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label for="service-technician">Assigned Technician *</label>
+            <input type="text" id="service-technician" required placeholder="e.g. P. Sharma (Senior Mech)" class="input-text">
+          </div>
+          <div class="form-col">
+            <label for="service-hours">Current Engine Hours *</label>
+            <input type="number" id="service-hours" step="0.5" min="1" required placeholder="e.g. 450" class="input-text">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="service-notes">Work Completed & Component Notes</label>
+          <textarea id="service-notes" rows="3" class="input-text" placeholder="Detailed service notes, filter serial numbers, oil grades used..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-service" class="btn-secondary-action">Cancel</button>
+          <button type="submit" id="btn-submit-service" class="btn-primary-action">
+            <i class="fa-solid fa-floppy-disk"></i> Save Service Record
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: EXPLAINABLE AI ANOMALY INSPECTION (PHASE 1) -->
+  <div id="modal-explain-anomaly" class="modal-backdrop hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title"><i class="fa-solid fa-brain text-purple"></i> Explainable AI Anomaly Diagnostic</h3>
+          <span class="modal-subtitle" id="explain-record-subtitle">Analyzing multivariate deviation against load-matched reference baseline</span>
+        </div>
+        <button id="explain-modal-close-btn" class="icon-close-btn" aria-label="Close Modal">&times;</button>
+      </div>
+
+      <div class="modal-body" id="explain-modal-body">
+        <div class="text-center py-4 text-muted">Loading Explainable AI diagnostics...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER DRAWER: GENERATOR & TELEMETRY DETAILS -->
+  <div id="drawer-backdrop" class="drawer-backdrop hidden">
+    <div class="drawer-panel" id="drawer-panel">
+      <div class="drawer-header">
+        <div class="drawer-title-wrap">
+          <h3 id="drawer-title">Generator Telemetry Details</h3>
+          <span class="drawer-subtitle" id="drawer-subtitle">Telemetry inspection</span>
+        </div>
+        <button id="drawer-close-btn" class="icon-close-btn">&times;</button>
+      </div>
+      <div class="drawer-body" id="drawer-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
